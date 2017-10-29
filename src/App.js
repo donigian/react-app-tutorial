@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import Header from './components/Header'
 import Grid from './components/Grid'
+import Form from './components/Form'
 
 // JSX allows us to insert any kind of JS (functions, variables etc)
 
@@ -27,13 +28,35 @@ class App extends Component {
         },
     ],
       name: 'Armen',
+      currentTitle: '',
+      currentDetails: '',
     }
+  }
+
+  handleChange(event){
+    const name = event.target.name;
+    const value = event.target.value;
+
+    this.setState({
+      [name]: value
+    });
+  }
+
+  handleSubmit(event){
+    alert(`Your note ${this.state.currentTitle} has been added successfully`);
+    event.preventDefault();
   }
 
   render() {
     return (
       <div className="App">
         <Header name={this.state.name}/>
+        <Form 
+          currentTitle = {this.state.currentTitle}
+          currentDetails = {this.state.currentDetails}
+          handleChange={this.state.handleChange}
+          handleSubmit={this.state.handleSubmit}
+          />
         <Grid notes = {this.state.notes}/>
       </div>
 
