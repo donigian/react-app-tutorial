@@ -26,12 +26,12 @@ class App extends Component {
 
   componentWillMount(){
     firebase.initializeApp({
-        apiKey: "AIzaSyC1aJZRLKua0FCZ59Exfn3JWOQKKcFcwLQ",
-        authDomain: "notepad-dc787.firebaseapp.com",
-        databaseURL: "https://notepad-dc787.firebaseio.com",
-        projectId: "notepad-dc787",
+        apiKey: "",
+        authDomain: "x.firebaseapp.com",
+        databaseURL: "https://x.firebaseio.com",
+        projectId: "x",
         storageBucket: "",
-        messagingSenderId: "666996638053"
+        messagingSenderId: ""
     });
     firebase.database().ref('/notes')
       .on('value', snapshot => {
@@ -72,6 +72,12 @@ class App extends Component {
     })
   }
 
+  deleteNote(id){
+    firebase.database().ref(`/notes/${id}`)
+      .remove();
+      alert("Successfully deleted note");
+  }
+
   render() {
     return (
       <div className={styles}>
@@ -82,7 +88,8 @@ class App extends Component {
           handleChange={this.handleChange.bind(this)}
           handleSubmit={this.handleSubmit.bind(this)}
           />
-        <Grid notes = {this.state.notes}/>
+        <Grid notes = {this.state.notes} deleteNote={this.deleteNote.bind(this)}/>
+
       </div>
 
     );

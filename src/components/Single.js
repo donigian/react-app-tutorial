@@ -8,8 +8,10 @@ const Single = (props) => {
                     <span className="card-title">{props.note.title}</span>
                     <p>{props.note.details}</p>
                 </div>
+                <div className="card-action">
+                    <a onClick={() => props.deleteNote(props.note.id)}>Delete</a>
+                </div>
             </div>
-            <div className="card-action"></div>
         </li>
     )
 }
