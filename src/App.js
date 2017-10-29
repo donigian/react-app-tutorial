@@ -7,6 +7,12 @@ import _ from 'lodash';
 
 // JSX allows us to insert any kind of JS (functions, variables etc)
 
+const styles = {
+  textAlign: 'center',
+  margin: 0,
+  padding: 0,
+}
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -54,19 +60,27 @@ class App extends Component {
   }
 
   handleSubmit(event){
-    alert(`Your note ${this.state.currentTitle} has been added successfully`);
     event.preventDefault();
+    const data = {
+      title: this.state.currentTitle,
+      details: this.state.currentDetails,
+    };
+    firebase.database().ref('/notes/').push(data, response => response);
+    this.setState({
+      currentTitle: '',
+      currentDetails: '',
+    })
   }
 
   render() {
     return (
-      <div className="App">
+      <div className={styles}>
         <Header name={this.state.name}/>
         <Form 
           currentTitle = {this.state.currentTitle}
           currentDetails = {this.state.currentDetails}
-          handleChange={this.state.handleChange}
-          handleSubmit={this.state.handleSubmit}
+          handleChange={this.handleChange.bind(this)}
+          handleSubmit={this.handleSubmit.bind(this)}
           />
         <Grid notes = {this.state.notes}/>
       </div>

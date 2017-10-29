@@ -26,7 +26,7 @@ class Form extends React.Component {
                         <input 
                             name = "currentDetails"
                             type = "text"
-                            value = {this.props.currentTitle}
+                            value = {this.props.currentDetails}
                             onChange = {this.props.handleChange}/>
                     </div> 
                     <div className="input-field col s2">
@@ -34,7 +34,6 @@ class Form extends React.Component {
                             type="submit" name="action"> Add Note</button>
                     </div>
                 </div>
-
             </form>
         );
     }
